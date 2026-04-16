@@ -21,8 +21,8 @@ try:
     firebase_config = os.getenv('FIREBASE_CONFIG_JSON')
     
     if firebase_config:
-        # Initialize from JSON string
-        config_dict = json.loads(firebase_config)
+        # Initialize from JSON string with stripping for robustness
+        config_dict = json.loads(firebase_config.strip())
         cred = credentials.Certificate(config_dict)
     else:
         # 2. Fallback to local file (for Local Development)
