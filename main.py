@@ -31,8 +31,10 @@ try:
     firebase_admin.initialize_app(cred)
     db = firestore.client()
 except Exception as e:
-    print(f"警告: Firebase initialization failed: {e}")
-    print("Ensure FIREBASE_CONFIG_JSON env var or serviceAccountKey.json exists.")
+    import traceback
+    print(f"CRITICAL: Firebase initialization failed: {str(e)}")
+    traceback.print_exc() 
+    print("Check if FIREBASE_CONFIG_JSON is valid JSON and contains all required fields.")
     db = None
 
 login_manager = LoginManager()
