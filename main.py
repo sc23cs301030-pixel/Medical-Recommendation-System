@@ -9,19 +9,30 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import io
+import json
 
 # flask app
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-very-secret-key-123'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your-very-secret-key-123')
 
 # Initialize Firebase
 try:
-    cred = credentials.Certificate("serviceAccountKey.json")
+    # 1. Check for Environment Variable (for Render/Deployment)
+    firebase_config = os.getenv('FIREBASE_CONFIG_JSON')
+    
+    if firebase_config:
+        # Initialize from JSON string
+        config_dict = json.loads(firebase_config)
+        cred = credentials.Certificate(config_dict)
+    else:
+        # 2. Fallback to local file (for Local Development)
+        cred = credentials.Certificate("serviceAccountKey.json")
+        
     firebase_admin.initialize_app(cred)
     db = firestore.client()
 except Exception as e:
     print(f"警告: Firebase initialization failed: {e}")
-    print("Ensure serviceAccountKey.json exists in root.")
+    print("Ensure FIREBASE_CONFIG_JSON env var or serviceAccountKey.json exists.")
     db = None
 
 login_manager = LoginManager()
