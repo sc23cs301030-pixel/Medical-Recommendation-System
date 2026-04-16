@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - HealthCare Center{% endblock %}
+
+{% block content %}
+<div class="blog-page py-5">
+    <div class="card-container reveal">
+        <h2 class="text-center text-primary mb-5">Building the Future of Medical AI</h2>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <p class="lead reveal">In the age of technology and information, access to accurate and timely healthcare is more critical than ever. We developed a symptom-based disease diagnosis web application leveraging Flask and Machine Learning.</p>
+
+                <div class="my-5 reveal">
+                    <h3><i class="fa-solid fa-microscope me-2 text-primary"></i>The Problem</h3>
+                    <p>Many people experience symptoms and want quick answers. Differentiating between various diseases with overlapping symptoms can be challenging. Our goal was to provide a convenient tool for instant insights.</p>
+                </div>
+
+                <div class="my-5 reveal">
+                    <h3><i class="fa-solid fa-code me-2 text-success"></i>The Solution</h3>
+                    <p>Our web app uses a pre-trained machine learning model to predict the most likely disease based on user symptoms. We combine this with comprehensive advice including precautions, medications, and diet recommendations.</p>
+                </div>
+
+                <div class="my-5 reveal">
+                    <h3><i class="fa-solid fa-award me-2 text-warning"></i>Key Technical Features</h3>
+                    <ul>
+                        <li><strong>Advanced SVM Model:</strong> Trained on curated clinical datasets.</li>
+                        <li><strong>Scalable Architecture:</strong> Built using Flask for rapid response.</li>
+                        <li><strong>User Privacy:</strong> Secure session management and data isolation.</li>
+                    </ul>
+                </div>
+
+                <div class="mt-5 p-4 bg-light rounded-3 reveal">
+                    <h3>Future Outlook 2026</h3>
+                    <p class="mb-0">By combining technology and healthcare, we aim to make reliable health information accessible to everyone. This project represents a significant step forward in remote healthcare solutions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Information - HealthCare Center{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row align-items-center mb-5 reveal">
+        <div class="col-lg-6">
+            <h1 class="display-4 fw-bold text-primary mb-4">How Our Technology Works</h1>
+            <p class="lead">HealthCare Center 2026 utilizes cutting-edge Support Vector Machine (SVM) models to distinguish between over 40 different diseases based on complex symptom patterns.</p>
+        </div>
+        <div class="col-lg-6">
+            <img src="https://images.unsplash.com/photo-1518152006812-edab29b069ac?auto=format&fit=crop&w=800&q=80" class="img-fluid rounded-3 shadow" alt="Technology">
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-6 reveal">
+            <div class="card-container h-100">
+                <h3 class="text-accent mb-3">Model Accuracy</h3>
+                <p>Our model has been validated against extensive datasets with a high accuracy rating for common clinical conditions. It provides a reliable starting point for health discussions.</p>
+            </div>
+        </div>
+        <div class="col-md-6 reveal">
+            <div class="card-container h-100">
+                <h3 class="text-accent mb-3">Holistic Guidance</h3>
+                <p>Beyond diagnosis, we provide a holistic care package including precautions, medication names, dietary adjustments, and workout recommendations tailored to the predicted condition.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-container reveal bg-light border-0 py-5 text-center">
+        <h2 class="mb-4">Mission Statement 2026</h2>
+        <p class="mx-auto" style="max-width: 900px;">To democratize medical knowledge and provide every individual with an AI-powered first-line diagnostic companion that is always available, always accurate, and always professional.</p>
+    </div>
+</div>
+{% endblock %}

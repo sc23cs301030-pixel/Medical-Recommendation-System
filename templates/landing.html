@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome - HealthCare Center 2026{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="landing-hero reveal">
+    <div class="container text-center">
+        <h1 class="display-3 fw-bold mb-4">Precision Diagnostics for the Future</h1>
+        <p class="lead mb-5 px-lg-5">Experience the next generation of healthcare with our AI-driven symptom analysis platform. Fast, accurate, and secure.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="/predict-tool" class="btn btn-primary btn-lg px-5 shadow">Get Started Now</a>
+            <a href="/login" class="btn btn-outline-light btn-lg px-5">Member Login</a>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container py-5 my-5">
+    <div class="row g-5 text-center">
+        <div class="col-md-4 reveal">
+            <div class="p-4 card-container h-100">
+                <i class="fa-solid fa-microchip fa-3x text-primary mb-4"></i>
+                <h3>Advanced AI</h3>
+                <p class="text-muted">Utilizing state-of-the-art machine learning models trained on millions of medical records.</p>
+            </div>
+        </div>
+        <div class="col-md-4 reveal">
+            <div class="p-4 card-container h-100">
+                <i class="fa-solid fa-user-shield fa-3x text-success mb-4"></i>
+                <h3>Secure & Private</h3>
+                <p class="text-muted">Your health data is encrypted and remains under your control at all times.</p>
+            </div>
+        </div>
+        <div class="col-md-4 reveal">
+            <div class="p-4 card-container h-100">
+                <i class="fa-solid fa-clock fa-3x text-info mb-4"></i>
+                <h3>Instant Insights</h3>
+                <p class="text-muted">Get detailed descriptions, precautions, and dietary advice in seconds.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="bg-primary text-white py-5 reveal">
+    <div class="container text-center py-4">
+        <h2 class="display-5 mb-4">Ready to take control of your health?</h2>
+        <p class="mb-4 text-white-50">Join thousands of users who trust HealthCare Center for daily health monitoring.</p>
+        <a href="/signup" class="btn btn-light btn-lg px-5">Join for Free</a>
+    </div>
+</div>
+{% endblock %}

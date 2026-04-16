@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Login - HealthCare AI{% endblock %}
+
+{% block content %}
+<div class="auth-container py-5 reveal">
+    <div class="card-container">
+        <h2 class="text-center text-primary mb-4">Welcome Back</h2>
+        <form action="/login" method="POST">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0 text-primary"><i class="fa-solid fa-user"></i></span>
+                    <input type="text" class="form-control border-start-0" id="username" name="username" required placeholder="Enter your username">
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="form-label">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0 text-primary"><i class="fa-solid fa-lock"></i></span>
+                    <input type="password" class="form-control border-start-0" id="password" name="password" required placeholder="Enter your password">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mb-3 py-2">Login</button>
+            <p class="text-center mb-0">
+                Don't have an account? <a href="/signup" class="text-primary text-decoration-none fw-bold">Sign up here</a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

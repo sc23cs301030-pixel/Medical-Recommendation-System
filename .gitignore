@@ -1,0 +1,29 @@
+# Python Virtual Environment
+venv/
+Lib/
+Scripts/
+Include/
+pyvenv.cfg
+.Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Firebase (CRITICAL: DO NOT DELETE THIS LINE)
+serviceAccountKey.json
+
+# Local persistence
+instance/
+healthcare.db
+*.xlsx
+
+# Media and large assets
+*.pptx
+*.zip
+*.log
+
+# IDE files
+.vscode/
+.idea/
+.gemini/

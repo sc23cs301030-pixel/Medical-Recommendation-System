@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Panel - HealthCare AI{% endblock %}
+
+{% block content %}
+<div class="animate-fade-in py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fa-solid fa-gauge-high me-2 text-warning"></i>Admin Dashboard</h2>
+        <div class="glass-card py-2 px-4 shadow-sm">
+            <span class="text-muted small">Total Predictions:</span> 
+            <span class="h4 mb-0 ms-2">{{ predictions|length }}</span>
+        </div>
+    </div>
+
+    <!-- Users Overview -->
+    <div class="glass-card mb-5">
+        <h4 class="mb-4">Registered Users</h4>
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th class="border-white-10">ID</th>
+                        <th class="border-white-10">Username</th>
+                        <th class="border-white-10">Email</th>
+                        <th class="border-white-10">Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td class="border-white-10">{{ user.id }}</td>
+                        <td class="border-white-10">{{ user.username }}</td>
+                        <td class="border-white-10">{{ user.email }}</td>
+                        <td class="border-white-10">
+                            {% if user.is_admin %}
+                            <span class="badge bg-warning text-dark">Admin</span>
+                            {% else %}
+                            <span class="badge bg-secondary">User</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Predictions History -->
+    <div class="glass-card">
+        <h4 class="mb-4">All User Predictions</h4>
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th class="border-white-10">Timestamp</th>
+                        <th class="border-white-10">User</th>
+                        <th class="border-white-10">Disease</th>
+                        <th class="border-white-10">Symptoms</th>
+                        <th class="border-white-10 text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in predictions %}
+                    <tr>
+                        <td class="border-white-10 small">{{ p.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td class="border-white-10">
+                            <i class="fa-solid fa-user-circle me-1 text-info"></i>{{ p.user.username }}
+                        </td>
+                        <td class="border-white-10 text-accent fw-bold">{{ p.predicted_disease }}</td>
+                        <td class="border-white-10 small text-muted" title="{{ p.symptoms }}">
+                            {{ p.symptoms[:50] }}{% if p.symptoms|length > 50 %}...{% endif %}
+                        </td>
+                        <td class="border-white-10 text-end">
+                            <a href="/admin/delete_prediction/{{ p.id }}" class="btn btn-sm btn-outline-danger border-0" 
+                               onclick="return confirm('Are you sure you want to delete this record?')">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% if not predictions %}
+                    <tr>
+                        <td colspan="5" class="text-center py-4 text-muted italic">No predictions found in the database.</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

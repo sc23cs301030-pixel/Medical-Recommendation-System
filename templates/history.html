@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction History - HealthCare AI{% endblock %}
+
+{% block content %}
+<div class="animate-fade-in">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Your Prediction History</h2>
+        <a href="/export" class="btn btn-outline-info rounded-pill">
+            <i class="fa-solid fa-file-excel me-2"></i>Export to Excel
+        </a>
+    </div>
+
+    {% if predictions %}
+        <div class="row">
+            {% for pred in predictions %}
+                <div class="col-md-6 mb-4">
+                    <div class="glass-card h-100">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h4 class="text-accent">{{ pred.predicted_disease }}</h4>
+                            <span class="badge bg-secondary opacity-75">{{ pred.timestamp.strftime('%d %b %Y') }}</span>
+                        </div>
+                        <p class="text-muted small mb-3">
+                            <strong>Symptoms:</strong> {{ pred.symptoms }}
+                        </p>
+                        <div class="p-3 bg-light rounded-3">
+                            <p class="mb-0 small">{{ pred.description[:200] }}...</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-5 glass-card">
+            <i class="fa-solid fa-folder-open fa-3x text-muted mb-3"></i>
+            <h3>No predictions found</h3>
+            <p class="text-muted">Start using our AI model to see your history here.</p>
+            <a href="/" class="btn btn-primary mt-3">Start Prediction</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up - HealthCare AI{% endblock %}
+
+{% block content %}
+<div class="auth-container py-5 reveal">
+    <div class="card-container">
+        <h2 class="text-center text-primary mb-4">Create Account</h2>
+        <form action="/signup" method="POST">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0 text-primary"><i class="fa-solid fa-user"></i></span>
+                    <input type="text" class="form-control border-start-0" id="username" name="username" required placeholder="Choose a username">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0 text-primary"><i class="fa-solid fa-envelope"></i></span>
+                    <input type="email" class="form-control border-start-0" id="email" name="email" required placeholder="your@email.com">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0 text-primary"><i class="fa-solid fa-lock"></i></span>
+                    <input type="password" class="form-control border-start-0" id="password" name="password" required placeholder="Create a strong password">
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="admin_secret" class="form-label">Admin Secret Key (Optional)</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0 text-primary"><i class="fa-solid fa-key"></i></span>
+                    <input type="password" class="form-control border-start-0" id="admin_secret" name="admin_secret" placeholder="Enter key for admin rights">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mb-3 py-2">Sign Up</button>
+            <p class="text-center mb-0">
+                Already have an account? <a href="/login" class="text-primary text-decoration-none fw-bold">Login here</a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

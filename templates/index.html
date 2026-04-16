@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Home - HealthCare Center{% endblock %}
+
+{% block content %}
+<div class="hero-section animate-fade-in">
+    <h1 class="hero-title">Health Care Center</h1>
+    <p class="lead text-muted mx-auto" style="max-width: 800px;">
+        An AI-powered diagnostic tool to help you identify health concerns based on symptoms.
+    </p>
+</div>
+
+<div class="row justify-content-center reveal">
+    <div class="col-md-8">
+        <div class="card-container animate-fade-in bg-white shadow-sm">
+            <h4 class="mb-4 text-center text-primary">Enter your symptoms</h4>
+            <form action="/predict" method="post">
+                <div class="mb-4">
+                    <div class="input-group input-group-lg border rounded">
+                        <span class="input-group-text bg-white border-0"><i class="fa-solid fa-stethoscope text-primary"></i></span>
+                        <input type="text" class="form-control border-0 bg-white" id="symptoms" name="symptoms" 
+                               placeholder="e.g. itching, skin rash, fatigue" required
+                               value="{{ symptoms if symptoms else '' }}"
+                               list="symptomsSuggestions">
+                        <datalist id="symptomsSuggestions">
+                            {% for symptom in symptoms_list %}
+                            <option value="{{ symptom|replace('_', ' ') }}">
+                            {% endfor %}
+                        </datalist>
+                        <button type="button" class="btn btn-link text-muted border-0" id="startSpeechRecognition">
+                            <i class="fa-solid fa-microphone"></i>
+                        </button>
+                    </div>
+                    <div class="form-text mt-2 text-center">
+                        Separate multiple symptoms with commas.
+                    </div>
+                </div>
+
+                {% if message %}
+                    <div class="alert alert-warning text-center">
+                        <i class="fa-solid fa-triangle-exclamation me-2"></i>{{ message }}
+                        {% if unrecognized %}
+                        <div class="mt-2 small text-muted">
+                            Unrecognized: <span class="text-danger">{{ unrecognized|join(', ') }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <button type="submit" class="btn btn-primary w-100 py-3 shadow-lg rounded-pill">
+                    <strong class="h5 mb-0">ANALYZE SYMPTOMS</strong>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5 text-center reveal">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <p class="text-muted small italic">
+                <i class="fa-solid fa-circle-info me-2"></i> Our AI model provides insights based on typical clinical patterns. Always consult a professional for medical advice.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const startSpeechRecognitionButton = document.getElementById('startSpeechRecognition');
+    const symptomsInput = document.getElementById('symptoms');
+
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.continuous = false;
+
+        startSpeechRecognitionButton.addEventListener('click', () => {
+            recognition.start();
+            startSpeechRecognitionButton.classList.add('text-danger');
+            startSpeechRecognitionButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+        });
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            symptomsInput.value = transcript;
+        };
+
+        recognition.onend = () => {
+            startSpeechRecognitionButton.classList.remove('text-danger');
+            startSpeechRecognitionButton.innerHTML = '<i class="fa-solid fa-microphone"></i>';
+        };
+    } else {
+        startSpeechRecognitionButton.style.display = 'none';
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Diagnosis Result - HealthCare Center{% endblock %}
+
+{% block content %}
+<div class="container py-5 reveal">
+    <!-- Analysis Summary Header -->
+    <div class="text-center mb-5">
+        <h5 class="text-uppercase text-primary fw-bold small mb-2">Patient Diagnosis Report</h5>
+        <div class="card-container py-4 shadow-sm border-0 animate-fade-in">
+            <p class="text-muted mb-1">Based on input: <span class="fw-bold text-dark">{{ symptoms }}</span></p>
+            
+            <div class="mb-3 d-flex justify-content-center gap-2">
+                <span class="badge rounded-pill bg-success-subtle text-success border border-success px-3 py-2">
+                    <i class="fa-solid fa-check-circle me-1"></i> {{ matched_count }} Symptoms Matched
+                </span>
+                
+                {% if unrecognized_list %}
+                <span class="badge rounded-pill bg-warning-subtle text-warning-emphasis border border-warning px-3 py-2" 
+                      title="Unrecognized inputs will not affect the diagnosis: {{ unrecognized_list|join(', ') }}">
+                    <i class="fa-solid fa-triangle-exclamation me-1"></i> {{ unrecognized_list|length }} Unrecognized
+                </span>
+                {% endif %}
+            </div>
+
+            <h1 class="display-3 fw-bold text-primary mb-0">{{ predicted_disease }}</h1>
+        </div>
+    </div>
+
+    <!-- Action Grid -->
+    <div class="row g-4 justify-content-center mb-5">
+        <div class="col-md-4 col-lg-2">
+            <button class="result-btn w-100 py-4" data-bs-toggle="modal" data-bs-target="#descriptionModal">
+                <i class="fa-solid fa-file-medical mb-2 fa-2x d-block"></i>
+                Description
+            </button>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <button class="result-btn w-100 py-4" data-bs-toggle="modal" data-bs-target="#precautionModal">
+                <i class="fa-solid fa-shield-heart mb-2 fa-2x d-block"></i>
+                Precaution
+            </button>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <button class="result-btn w-100 py-4" data-bs-toggle="modal" data-bs-target="#medicationsModal">
+                <i class="fa-solid fa-pills mb-2 fa-2x d-block"></i>
+                Medications
+            </button>
+        </div>
+        <div class="col-md-6 col-lg-2">
+            <button class="result-btn w-100 py-4" data-bs-toggle="modal" data-bs-target="#workoutsModal">
+                <i class="fa-solid fa-person-running mb-2 fa-2x d-block"></i>
+                Workouts
+            </button>
+        </div>
+        <div class="col-md-6 col-lg-2">
+            <button class="result-btn w-100 py-4" data-bs-toggle="modal" data-bs-target="#dietsModal">
+                <i class="fa-solid fa-carrot mb-2 fa-2x d-block"></i>
+                Diets
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation Options -->
+    <div class="text-center mt-5 reveal">
+        <a href="/predict-tool?symptoms={{ symptoms|urlencode }}" class="btn btn-outline-primary btn-lg px-5 me-3 rounded-pill">
+            <i class="fa-solid fa-chevron-left me-2"></i>Refine Symptoms
+        </a>
+        <a href="/history" class="btn btn-primary btn-lg px-5 rounded-pill shadow">
+            View My History <i class="fa-solid fa-clock-rotate-left ms-2"></i>
+        </a>
+    </div>
+</div>
+
+<!-- Modal Overlays -->
+{% include "modals.html" %}
+
+{% endblock %}
